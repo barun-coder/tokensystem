@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2F2444</color>
+    <color name="colorPrimaryDark">#362249</color>
+    <color name="colorAccent">#3E394F</color>
+
+    <color name="theme_color">@color/colorPrimaryDark</color>
+    <color name="theme_light_color">@color/colorPrimary</color>
+    <color name="black">#362249</color>
+    <color name="white">#ffffff</color>
+    <color name="skyblue">#97CFE2</color>
+    <color name="textColor">#3E394F</color>
+    <color name="secondtextColor">#3E394F</color>
+    <color name="textColorhint">#BDBEC7</color>
+    <color name="box">#B3B4B8</color>
+    <color name="light_gray">#C8C8C8</color>
+    <color name="gray">#919191</color>
+    <color name="shadow">#d0d8dc</color>
+    <color name="bck">#222224</color>
+</resources>
