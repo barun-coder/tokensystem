@@ -13,7 +13,7 @@ public final class ApiEndPoint {
     static final String ENDPOINT_SERVER_LOGIN = BuildConfig.BASE_URL + "login/ThirdParty";
     static final String ENDPOINT_SERVER_TOKEN_STATUS = BuildConfig.BASE_URL + "token/token/";
     static final String ENDPOINT_SERVER_GET_TOKEN_SKIP= BuildConfig.BASE_URL + "token/token/token_id:";
-    static final String ENDPOINT_SERVER_GET_NEW_TOKEN_SKIP= BuildConfig.BASE_URL + "token/token/token_display_name:";
+    static final String ENDPOINT_SERVER_GET_NEW_TOKEN_SKIP= BuildConfig.BASE_URL + "token/token/subcounter_id:";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

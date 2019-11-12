@@ -5,11 +5,13 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/skyblue</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowDisablePreview">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/skyblue</item>
         <item name="colorAccent">@color/colorAccent</item>

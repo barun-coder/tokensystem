@@ -1,14 +1,19 @@
 
 package com.displayfort.dftoken.ui.feedback;
 
+import android.animation.Animator;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.displayfort.dftoken.BR;
 import com.displayfort.dftoken.OnValueReturn;
 import com.displayfort.dftoken.R;
@@ -21,6 +26,7 @@ import com.displayfort.dftoken.ui.base.BaseActivity;
 import com.displayfort.dftoken.ui.login.LoginActivity;
 import com.displayfort.dftoken.utils.DialogUtils;
 import com.displayfort.dftoken.utils.Utility;
+import com.displayfort.dftoken.widgets.TextviewBold;
 
 import java.util.List;
 
@@ -28,12 +34,13 @@ import javax.inject.Inject;
 
 
 public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, TokenViewModel> implements TokenNavigator {
+    private static final long TIME_ELAPSE = 800;
     @Inject
     ViewModelProviderFactory factory;
     private TokenViewModel tokenViewModel;
     private ActivityTokenDetailBinding mActivityTokenDetailBinding;
     private int tokenId = 0;
-    private String tokenDisplayName="";
+    private String tokenDisplayName = "";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, TokenActivity.class);
@@ -76,8 +83,8 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
     private void setUp() {
         String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT).trim();
         String companyName = getViewModel().getDataManager().getCurrentUserName();
-        mActivityTokenDetailBinding.hospital.setText(companyName);
-        mActivityTokenDetailBinding.subheading.setText(header);
+        mActivityTokenDetailBinding.hospital.setText(companyName.trim());
+        mActivityTokenDetailBinding.subheading.setText(header.trim());
         mActivityTokenDetailBinding.swiperefreshlayout.setColorSchemeResources(R.color.colorPrimary);
         mActivityTokenDetailBinding.swiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -91,11 +98,67 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
 
     private void setToken(String value, boolean isStatus) {
         if (isStatus) {
-            mActivityTokenDetailBinding.token.setText(value);
+            startAnimation(Techniques.ZoomOutDown, value);
+//            mActivityTokenDetailBinding.token.setText(value);
         } else {
+            EndAnimation(Techniques.Shake, value);
             mActivityTokenDetailBinding.token.setText("");
             Utility.ShowToast("No record found", this);
         }
+    }
+
+    private void startAnimation(Techniques zoomOutDown, final String value) {
+        YoYo.with(zoomOutDown)
+                .duration(TIME_ELAPSE)
+                .pivot(YoYo.CENTER_PIVOT, YoYo.CENTER_PIVOT)
+                .interpolate(new AccelerateDecelerateInterpolator())
+                .withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mActivityTokenDetailBinding.token.setText(value);
+                        EndAnimation(Techniques.ZoomInUp, value);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .playOn(mActivityTokenDetailBinding.token);
+    }
+
+    private void EndAnimation(Techniques zoomOutDown, String value) {
+        YoYo.with(zoomOutDown)
+                .duration(TIME_ELAPSE)
+                .pivot(YoYo.CENTER_PIVOT, YoYo.CENTER_PIVOT)
+                .interpolate(new AccelerateDecelerateInterpolator())
+                .withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .playOn(mActivityTokenDetailBinding.token);
     }
 
     @Override
@@ -152,7 +215,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
 
         } else {
             tokenId = 0;
-            tokenDisplayName="";
+            tokenDisplayName = "";
             setToken(tokenDisplayName, response.isStatus());
         }
     }

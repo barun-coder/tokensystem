@@ -58,7 +58,7 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Single<TokenResponse> doSkipTokenReq(TokenRequest.TokenStatus tokenStatus, String tokenId, String subcounter_id) {
         if (tokenStatus == null) {
-            return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_GET_NEW_TOKEN_SKIP + tokenId + ":subcounter_id:" + subcounter_id)
+            return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_GET_NEW_TOKEN_SKIP + subcounter_id + ":token_display_name:" + tokenId)
                     .addHeaders(mApiHeader.getProtectedApiHeader())
                     .build()
                     .getObjectSingle(TokenResponse.class);
