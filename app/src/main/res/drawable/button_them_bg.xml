@@ -11,6 +11,12 @@
             <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
+
+    <item android:state_enabled="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/disbale_color" />
+        </shape>
+    </item>
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/colorPrimary" />

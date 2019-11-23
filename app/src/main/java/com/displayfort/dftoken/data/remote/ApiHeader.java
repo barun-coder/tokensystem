@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class ApiHeader {
-
+    public static String CUSTOM_BASE_URL = "";
     private ProtectedApiHeader mProtectedApiHeader;
 
     private PublicApiHeader mPublicApiHeader;

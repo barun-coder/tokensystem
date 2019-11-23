@@ -3,6 +3,7 @@ package com.displayfort.dftoken.data;
 
 import android.content.Context;
 
+import com.displayfort.dftoken.NrFtPrefrence;
 import com.displayfort.dftoken.data.local.db.DbHelper;
 import com.displayfort.dftoken.data.local.prefs.AppPreferencesHelper;
 import com.displayfort.dftoken.data.local.prefs.PreferencesHelper;
@@ -27,7 +28,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
- * Created by Yogesh  on 07/07/17.
+ * Created by Husain on 07/07/17.
  */
 @Singleton
 public class AppDataManager implements DataManager {
@@ -58,21 +59,25 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doServerLoginApiCall(request);
     }
 
     @Override
     public Single<LoginResponse> doLicenseCheckApiCall(LoginRequest.LicenseRequest request) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doLicenseCheckApiCall(request);
     }
 
     @Override
-    public Single<TokenResponse> doSkipTokenReq(TokenRequest.TokenStatus tokenStatus, String tokenId,String subcounterId) {
-        return mApiHelper.doSkipTokenReq(tokenStatus, tokenId,subcounterId);
+    public Single<TokenResponse> doSkipTokenReq(TokenRequest.TokenStatus tokenStatus, String tokenId, String subcounterId) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
+        return mApiHelper.doSkipTokenReq(tokenStatus, tokenId, subcounterId);
     }
 
     @Override
     public Single<TokenResponse> doGetTokenStatus(String subcounterid, String status) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doGetTokenStatus(subcounterid, status);
     }
 

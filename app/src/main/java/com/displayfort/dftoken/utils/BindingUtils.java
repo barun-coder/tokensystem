@@ -1,14 +1,6 @@
 
 package com.displayfort.dftoken.utils;
 
-import android.content.Context;
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-
-import java.io.File;
-
 
 public final class BindingUtils {
 

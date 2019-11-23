@@ -90,15 +90,15 @@
                     android:layout_height="40dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/flat_them_bg"
-                    android:drawableLeft="@mipmap/username_icon"
+                    android:drawableLeft="@drawable/ic_screen_share_black_24dp"
                     android:drawablePadding="10dp"
-                    android:hint="Username"
+                    android:hint="IP Address"
                     android:inputType="textEmailAddress"
                     android:padding="4dp"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/textColor"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <com.displayfort.dftoken.widgets.EditextRegular
                     android:id="@+id/password"
@@ -106,7 +106,7 @@
                     android:layout_height="40dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/flat_them_bg"
-                    android:drawableLeft="@mipmap/password_icon"
+                    android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                     android:drawablePadding="10dp"
                     android:hint="@string/prompt_password"
                     android:imeActionLabel="@string/action_sign_in_short"
@@ -140,6 +140,7 @@
                     android:background="?selectableItemBackground"
                     android:onClick="@{() -> viewModel.onForgotPasswordClick()}"
                     android:padding="4dp"
+                    android:visibility="gone"
                     android:text="Forget Password"
                     android:textColor="@color/textColor"
                     android:textSize="16sp" />

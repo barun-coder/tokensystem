@@ -6,10 +6,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.daimajia.androidanimations.library.Techniques;
@@ -26,7 +26,6 @@ import com.displayfort.dftoken.ui.base.BaseActivity;
 import com.displayfort.dftoken.ui.login.LoginActivity;
 import com.displayfort.dftoken.utils.DialogUtils;
 import com.displayfort.dftoken.utils.Utility;
-import com.displayfort.dftoken.widgets.TextviewBold;
 
 import java.util.List;
 
@@ -41,6 +40,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
     private ActivityTokenDetailBinding mActivityTokenDetailBinding;
     private int tokenId = 0;
     private String tokenDisplayName = "";
+    private int call = 0;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, TokenActivity.class);
@@ -85,6 +85,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
         String companyName = getViewModel().getDataManager().getCurrentUserName();
         mActivityTokenDetailBinding.hospital.setText(companyName.trim());
         mActivityTokenDetailBinding.subheading.setText(header.trim());
+        mActivityTokenDetailBinding.swiperefreshlayout.setEnabled(false);
         mActivityTokenDetailBinding.swiperefreshlayout.setColorSchemeResources(R.color.colorPrimary);
         mActivityTokenDetailBinding.swiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -99,11 +100,22 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
     private void setToken(String value, boolean isStatus) {
         if (isStatus) {
             startAnimation(Techniques.ZoomOutDown, value);
-//            mActivityTokenDetailBinding.token.setText(value);
+            mActivityTokenDetailBinding.nBtn.setEnabled(true);
+            mActivityTokenDetailBinding.pBtn.setEnabled(true);
         } else {
             EndAnimation(Techniques.Shake, value);
+            mActivityTokenDetailBinding.nBtn.setEnabled(false);
+            mActivityTokenDetailBinding.pBtn.setEnabled(false);
             mActivityTokenDetailBinding.token.setText("");
             Utility.ShowToast("No record found", this);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(!mActivityTokenDetailBinding.nBtn.isEnabled()) {
+                        tokenViewModel.getTokenDetail("1", false);
+                    }
+                }
+            }, 1000 * 60 * 1);
         }
     }
 
@@ -166,7 +178,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
         DialogUtils.onGetNewTokenDialog(TokenActivity.this, new OnValueReturn() {
             @Override
             public void getskipTokenID(String tokenId) {
-                tokenViewModel.onGetSkipToken(tokenId);
+                tokenViewModel.onGetSelectedToken(tokenId);
             }
         });
 

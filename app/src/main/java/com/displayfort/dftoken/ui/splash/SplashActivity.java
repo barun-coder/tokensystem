@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -16,6 +17,7 @@ import com.displayfort.dftoken.ui.base.BaseActivity;
 import com.displayfort.dftoken.ui.base.BaseAnimation;
 import com.displayfort.dftoken.ui.feedback.TokenActivity;
 import com.displayfort.dftoken.ui.login.LoginActivity;
+import com.onesignal.OneSignal;
 
 import javax.inject.Inject;
 
@@ -92,7 +94,16 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
                 mSplashViewModel.startAnimation();
             }
         }, 1500);
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("debug", "User:" + userId);
+                mPlayerID = userId;
+                if (registrationId != null)
+                    Log.d("debug", "registrationId:" + registrationId);
 
+            }
+        });
 
     }
 

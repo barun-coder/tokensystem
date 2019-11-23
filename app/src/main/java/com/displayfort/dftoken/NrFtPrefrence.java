@@ -64,4 +64,19 @@ public class NrFtPrefrence {
         return sharedPreferences.getString("MacAdd", null);
     }
 
+    public void setIP_ADDRESS(String IP_ADDRESS) {
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.putString("IP_ADDRESS", null == IP_ADDRESS ? "" : IP_ADDRESS);
+        prefsEditor.commit();
+    }
+
+
+    public String getIP_ADDRESS() {
+        return "http://" + sharedPreferences.getString("IP_ADDRESS", null)+"/displayfort-api/api/";
+    }
+
+    public String getOnlyIP_ADDRESS() {
+        return  sharedPreferences.getString("IP_ADDRESS", "");
+    }
+
 }

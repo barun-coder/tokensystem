@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".DfTokenApplication"
+        android:name="com.displayfort.dftoken.DfTokenApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.displayfort.dftoken.ui.splash.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
@@ -28,20 +28,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.displayfort.dftoken.ui.login.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".ui.adminLogin.AdminLoginActivity"
+            android:name="com.displayfort.dftoken.ui.adminLogin.AdminLoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".ui.feedback.TokenActivity"
+            android:name="com.displayfort.dftoken.ui.feedback.TokenActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppThemeDark" />
         <activity
-            android:name=".ui.thankyou.ThankyouActivity"
+            android:name="com.displayfort.dftoken.ui.thankyou.ThankyouActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait" />
     </application>

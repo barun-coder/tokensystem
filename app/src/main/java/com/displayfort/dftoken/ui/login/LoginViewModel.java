@@ -15,10 +15,13 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         super(dataManager, schedulerProvider);
     }
 
-    public int isEmailAndPasswordValid(String email, String password) {
+    public int isEmailAndPasswordValid(String email, String password, String IpAddress) {
         // validate email and password
         if (TextUtils.isEmpty(email)) {
             return 1;
+        }
+        if (TextUtils.isEmpty(IpAddress)) {
+            return 3;
         }
         if (TextUtils.isEmpty(password)) {
             return 2;

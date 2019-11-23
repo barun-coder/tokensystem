@@ -4,8 +4,6 @@ package com.displayfort.dftoken.data.model.api.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by Husain  on 07/07/17.
  */

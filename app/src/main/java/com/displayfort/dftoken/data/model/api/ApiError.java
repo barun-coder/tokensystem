@@ -36,7 +36,7 @@ public class ApiError {
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     this.statusCode = "" + statusCode;
-                    this.message = jsonObject.optString("error");
+                    this.message = jsonObject.optString("error","Something went wrong");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

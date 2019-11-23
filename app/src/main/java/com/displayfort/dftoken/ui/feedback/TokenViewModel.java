@@ -2,7 +2,6 @@
 package com.displayfort.dftoken.ui.feedback;
 
 import com.displayfort.dftoken.data.DataManager;
-import com.displayfort.dftoken.data.model.api.request.LoginRequest;
 import com.displayfort.dftoken.data.model.api.request.TokenRequest;
 import com.displayfort.dftoken.ui.base.BaseViewModel;
 import com.displayfort.dftoken.utils.rx.SchedulerProvider;
@@ -49,7 +48,7 @@ public class TokenViewModel extends BaseViewModel<TokenNavigator> {
     }
 
 
-    public void onGetSkipToken(String tokenId) {
+    public void onGetSelectedToken(String tokenId) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .doSkipTokenReq(null,tokenId, getDataManager().getCurrentUserId())

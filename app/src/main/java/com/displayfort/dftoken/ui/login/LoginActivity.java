@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.displayfort.dftoken.BR;
+import com.displayfort.dftoken.NrFtPrefrence;
 import com.displayfort.dftoken.R;
 import com.displayfort.dftoken.ViewModelProviderFactory;
 import com.displayfort.dftoken.data.model.api.ApiError;
@@ -72,10 +73,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void login() {
         String identifierId = mActivityLoginBinding.identifier.getText().toString();
+        String IpAddress = mActivityLoginBinding.username.getText().toString();
         String licensekey = mActivityLoginBinding.password.getText().toString();
-        int validation = mLoginViewModel.isEmailAndPasswordValid(identifierId, licensekey);
+        int validation = mLoginViewModel.isEmailAndPasswordValid(identifierId, licensekey, IpAddress);
         if (validation == 0) {
             hideKeyboard();
+            new NrFtPrefrence(this).setIP_ADDRESS(IpAddress);
             mLoginViewModel.liscensreCheck(identifierId, licensekey);
         } else {
             setError(validation);
@@ -92,7 +95,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     private void setError(int validation) {
         switch (validation) {
             case 1:
-                mActivityLoginBinding.username.setError("Please enter identifier Id");
+                mActivityLoginBinding.username.setError("Please enter Unique Id");
+                break;
+            case 3:
+                mActivityLoginBinding.username.setError("Please enter IP address");
                 break;
             case 2:
                 mActivityLoginBinding.password.setError("Please enter License key ");
@@ -109,12 +115,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openMainActivity(LoginResponse.UserDao data) {
-        if(data.getSub_user_id()!=null && !data.getSub_user_id().equals("")) {
+        if (data.getSub_user_id() != null && !data.getSub_user_id().equals("")) {
             Intent intent = TokenActivity.newIntent(LoginActivity.this);
             startActivity(intent);
             BaseAnimation.setAnimationTransition(this, BaseAnimation.EFFECT_TYPE.TAB_ZOOM);
             finish();
-        }else{
+        } else {
             DialogUtils.showAlertDialog(this, "Account not yet complete\nPlease contact Admin for more detail");
         }
     }
@@ -136,7 +142,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         mActivityLoginBinding = getViewDataBinding();
         mLoginViewModel.setNavigator(this);
         mActivityLoginBinding.identifier.setVisibility(View.VISIBLE);
-        mActivityLoginBinding.username.setVisibility(View.GONE);
+        mActivityLoginBinding.username.setVisibility(View.VISIBLE);
+        mActivityLoginBinding.username.setText(new NrFtPrefrence(this).getOnlyIP_ADDRESS());
         mActivityLoginBinding.password.setHint("Enter License key");
         getUniqueNumberPermision();
         mActivityLoginBinding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -221,6 +228,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             Log.d("UNIQUE", android_id);
             mIdentifierId = android_id;
             mActivityLoginBinding.identifier.setText(android_id);
+//            mActivityLoginBinding.identifier.setText(mPlayerID);
         } catch (Exception e) {
             e.printStackTrace();
         }

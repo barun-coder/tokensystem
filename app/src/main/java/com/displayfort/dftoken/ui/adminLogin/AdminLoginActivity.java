@@ -72,7 +72,7 @@ public class AdminLoginActivity extends BaseActivity<ActivityLoginBinding, Login
     public void login() {
         String email = mActivityLoginBinding.username.getText().toString();
         String password = mActivityLoginBinding.password.getText().toString();
-        int validation = mLoginViewModel.isEmailAndPasswordValid(email, password);
+        int validation = mLoginViewModel.isEmailAndPasswordValid(email, password,"");
         if (validation == 0) {
             hideKeyboard();
             mLoginViewModel.login(email, password);

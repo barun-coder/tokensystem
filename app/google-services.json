@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "908284914566",
+    "firebase_url": "https://token-8a1ae.firebaseio.com",
+    "project_id": "token-8a1ae",
+    "storage_bucket": "token-8a1ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908284914566:android:cd1c15d393f740ceed9a07",
+        "android_client_info": {
+          "package_name": "com.displayfort.dftoken"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908284914566-qn14lnh7fl6grtj336ckrelj1d15ff6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.displayfort.dftoken",
+            "certificate_hash": "97373c144967d1dbb18cf98c1ff06ffd2bc3c8e2"
+          }
+        },
+        {
+          "client_id": "908284914566-d5t0o557g3f758gkm9c5tovk1piemker.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBH9AipUl73BNhiogvJgMdbuKQLthMjpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908284914566-d5t0o557g3f758gkm9c5tovk1piemker.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

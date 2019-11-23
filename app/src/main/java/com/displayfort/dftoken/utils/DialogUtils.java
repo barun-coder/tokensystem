@@ -5,17 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.displayfort.dftoken.OnValueReturn;
 import com.displayfort.dftoken.R;
-import com.displayfort.dftoken.ui.feedback.TokenActivity;
 
 /**
  * Created by Husain on 26/04/2019 12:41.
