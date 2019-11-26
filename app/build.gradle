@@ -28,8 +28,8 @@ android {
         applicationId "com.displayfort.dftoken"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 6
-        versionName "1.1.5"
+        versionCode 7
+        versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 onesignal_app_id               : '6bece62e-23b0-4904-adf4-a71ea815418f',
@@ -44,7 +44,7 @@ android {
             buildConfigField("String", "token_code", "\"ABCXYZ123TEST\"")
         }
         release {
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.SignConfig
             multiDexEnabled true
             minifyEnabled false

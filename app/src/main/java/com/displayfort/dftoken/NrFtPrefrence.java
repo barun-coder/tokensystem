@@ -72,11 +72,15 @@ public class NrFtPrefrence {
 
 
     public String getIP_ADDRESS() {
-        return "http://" + sharedPreferences.getString("IP_ADDRESS", null)+"/displayfort-api/api/";
+        return "http://" + sharedPreferences.getString("IP_ADDRESS", null) + "/displayfort-api/api/";
+    }
+
+    public String getImageIP_ADDRESS() {
+        return "http://" + sharedPreferences.getString("IP_ADDRESS", null) + "/displayfort-dashboard/assets/img/";
     }
 
     public String getOnlyIP_ADDRESS() {
-        return  sharedPreferences.getString("IP_ADDRESS", "");
+        return sharedPreferences.getString("IP_ADDRESS", "");
     }
 
 }

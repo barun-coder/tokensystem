@@ -5,6 +5,8 @@ import android.animation.Animator;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +17,7 @@ import com.androidnetworking.error.ANError;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.displayfort.dftoken.BR;
+import com.displayfort.dftoken.NrFtPrefrence;
 import com.displayfort.dftoken.OnValueReturn;
 import com.displayfort.dftoken.R;
 import com.displayfort.dftoken.ViewModelProviderFactory;
@@ -24,6 +27,7 @@ import com.displayfort.dftoken.data.model.api.response.TokenResponse;
 import com.displayfort.dftoken.databinding.ActivityTokenDetailBinding;
 import com.displayfort.dftoken.ui.base.BaseActivity;
 import com.displayfort.dftoken.ui.login.LoginActivity;
+import com.displayfort.dftoken.utils.AppConstants;
 import com.displayfort.dftoken.utils.DialogUtils;
 import com.displayfort.dftoken.utils.Utility;
 
@@ -76,13 +80,21 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
         mActivityTokenDetailBinding = getViewDataBinding();
         tokenViewModel.setNavigator(this);
         setUp();
-
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            mActivityTokenDetailBinding.adminLogin.setText("Version: " + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
     private void setUp() {
         String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT).trim();
         String companyName = getViewModel().getDataManager().getCurrentUserName();
+        String logoPath = getViewModel().getDataManager().getCurrentUserProfilePicUrl();
+
         mActivityTokenDetailBinding.hospital.setText(companyName.trim());
         mActivityTokenDetailBinding.subheading.setText(header.trim());
         mActivityTokenDetailBinding.swiperefreshlayout.setEnabled(false);
@@ -94,7 +106,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
             }
         });
         mActivityTokenDetailBinding.selectToken.setText(Html.fromHtml("<u>Select Token</u>"));
-
+        com.displayfort.dftoken.utils.BindingUtils.setImageUrl(mActivityTokenDetailBinding.logo, new NrFtPrefrence(TokenActivity.this).getImageIP_ADDRESS() + logoPath);
     }
 
     private void setToken(String value, boolean isStatus) {
@@ -111,7 +123,7 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(!mActivityTokenDetailBinding.nBtn.isEnabled()) {
+                    if (!mActivityTokenDetailBinding.nBtn.isEnabled()) {
                         tokenViewModel.getTokenDetail("1", false);
                     }
                 }
