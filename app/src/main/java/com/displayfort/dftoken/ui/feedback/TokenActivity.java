@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
+import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.androidnetworking.error.ANError;
@@ -242,5 +243,28 @@ public class TokenActivity extends BaseActivity<ActivityTokenDetailBinding, Toke
             tokenDisplayName = "";
             setToken(tokenDisplayName, response.isStatus());
         }
+    }
+
+    int doubleBackToExitPressedOnce = 0;
+
+    @Override
+    public void onLogoutClick() {
+
+
+        if (doubleBackToExitPressedOnce == 2) {
+            Log.d("DOUBLETP", "NEW T VALUE:" + doubleBackToExitPressedOnce + "");
+            tokenViewModel.getLogout();
+            return;
+        } else {
+            Log.d("DOUBLETP", "NEW F VALUE:" + doubleBackToExitPressedOnce + "");
+        }
+
+        ++this.doubleBackToExitPressedOnce;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = 0;
+            }
+        }, 2000);
     }
 }

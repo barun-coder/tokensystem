@@ -21,4 +21,6 @@ public interface TokenNavigator extends BaseNavigator {
     void openLoginActivity();
 
     void getTokenDetail(TokenResponse response);
+
+    void onLogoutClick();
 }

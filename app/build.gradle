@@ -28,8 +28,12 @@ android {
         applicationId "com.displayfort.dftoken"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 7
-        versionName "1.3"
+        /*KNOX*/
+        versionCode 8
+        versionName "1.6"
+        /*PLAYSTORE*/
+//        versionCode 7
+//        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 onesignal_app_id               : '6bece62e-23b0-4904-adf4-a71ea815418f',

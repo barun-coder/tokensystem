@@ -65,11 +65,15 @@ public class TokenViewModel extends BaseViewModel<TokenNavigator> {
     }
 
     public void onLogout() {
+        getNavigator().onLogoutClick();
+
+    }
+
+    public void getLogout(){
         getDataManager().setUserAsLoggedOut();
         setIsLoading(false);
         getNavigator().openLoginActivity();
     }
-
 
     public void onPrevious() {
         getNavigator().onSkip();
